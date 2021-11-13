@@ -8,7 +8,8 @@ function Table({size}){
             const res = await fetch('http://localhost:8080/public/generate/board?size=' + size)
             setArray(await res.json())
         }
-        if(size!=array.length)
+        console.log(array)
+        if(array.length==0)
         {
             getArray()
         }

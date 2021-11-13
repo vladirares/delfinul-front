@@ -1,18 +1,14 @@
 import Row from "./Row";
 import { useState, useEffect } from 'react';
 function Table({size}){
-    const [array, setArray] = useState([]);
-
+    const [array, setArray] = useState(null);
     useEffect(() => {
-        async function getArray() {
+        
+        async function getToken() {
             const res = await fetch('http://localhost:8080/public/generate/board?size=' + size)
             setArray(await res.json())
         }
-        if(size!=array.length)
-        {
-            getArray()
-        }
-    })
+    }
     return (<table>
         {array.map((object,index) => <Row row={object} key={index}/> )}
     </table>);

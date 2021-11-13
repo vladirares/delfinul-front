@@ -18,7 +18,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <p>{size}</p>
-        <Table size={size} />
+        <Table size={size } />
         <ReactSlider
         className="vertical-slider"
         thumbClassName="example-thumb"

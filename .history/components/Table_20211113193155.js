@@ -9,9 +9,8 @@ function Table({size}){
             setArray(await res.json())
         }
         if(size!=array.length)
-        {
-            getArray()
-        }
+        getArray()
+        
     })
     return (<table>
         {array.map((object,index) => <Row row={object} key={index}/> )}

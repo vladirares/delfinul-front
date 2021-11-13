@@ -3,11 +3,8 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Table from '../components/Table'
 import ReactSlider from 'react-slider'
-import { useState } from 'react'
 
 export default function Home() {
-
-  const [size,setSize]=useState(50)
   return (
     <div className={styles.container}>
       <Head>
@@ -17,22 +14,18 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <p>{size}</p>
-        <Table size={size} />
+        <Table size={} />
         <ReactSlider
         className="vertical-slider"
         thumbClassName="example-thumb"
         trackClassName="example-track"
-        defaultValue={[2, size, 100]}
+        defaultValue={[0, 50, 100]}
         ariaLabel={['Lowest thumb', 'Middle thumb', 'Top thumb']}
         renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
         orientation="vertical"
         invert
         pearling
-        min={2}
-        onAfterChange={(value)=>
-          {setSize(value[1])
-          }}
+        minDistance={10}
         />
       </main>
 
@@ -53,5 +46,20 @@ export default function Home() {
   )
 }
 
+// This gets called on every request
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch('http://localhost:8080/public/generate/board?size=40')
+  const array = await res.json()
 
+  // Pass data to the page via props
+  return { props: { array } }
+}
 
+function getArray(){
+  return [[0,1,0,1,1],
+          [0,1,0,1,1],
+          [0,0,0,0,1],
+          [0,1,2,1,1],
+          [3,1,1,1,1]]
+}

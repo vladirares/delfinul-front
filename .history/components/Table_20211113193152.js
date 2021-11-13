@@ -8,10 +8,9 @@ function Table({size}){
             const res = await fetch('http://localhost:8080/public/generate/board?size=' + size)
             setArray(await res.json())
         }
-        if(size!=array.length)
-        {
-            getArray()
-        }
+        if(size!=arr)
+        getArray()
+        
     })
     return (<table>
         {array.map((object,index) => <Row row={object} key={index}/> )}

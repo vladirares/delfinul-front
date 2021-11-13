@@ -10,8 +10,8 @@ function Table({size}){
         }
         if(size!=array.length)
         {
-            getArray()
-        }
+        getArray()
+        
     })
     return (<table>
         {array.map((object,index) => <Row row={object} key={index}/> )}

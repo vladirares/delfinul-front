@@ -10,6 +10,7 @@ function Table({size}){
         }
         if(size!=array.length)
         {
+            
             getArray()
         }
     })

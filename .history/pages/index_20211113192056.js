@@ -17,22 +17,21 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <p>{size}</p>
         <Table size={size} />
         <ReactSlider
         className="vertical-slider"
         thumbClassName="example-thumb"
         trackClassName="example-track"
-        defaultValue={[2, size, 100]}
+        defaultValue={[0, 50, 100]}
         ariaLabel={['Lowest thumb', 'Middle thumb', 'Top thumb']}
         renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
         orientation="vertical"
         invert
         pearling
-        min={2}
+        minDistance={10}
         onAfterChange={(value)=>
-          {setSize(value[1])
-          }}
+          setSize(value[1])
+          }
         />
       </main>
 

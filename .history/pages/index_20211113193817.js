@@ -23,7 +23,7 @@ export default function Home() {
         className="vertical-slider"
         thumbClassName="example-thumb"
         trackClassName="example-track"
-        defaultValue={[2, size, 100]}
+        defaultValue={[1, size, 100]}
         ariaLabel={['Lowest thumb', 'Middle thumb', 'Top thumb']}
         renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
         orientation="vertical"

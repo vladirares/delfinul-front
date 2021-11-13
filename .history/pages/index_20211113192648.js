@@ -23,15 +23,17 @@ export default function Home() {
         className="vertical-slider"
         thumbClassName="example-thumb"
         trackClassName="example-track"
-        defaultValue={[2, size, 100]}
+        defaultValue={[0, size, 100]}
         ariaLabel={['Lowest thumb', 'Middle thumb', 'Top thumb']}
         renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
         orientation="vertical"
         invert
         pearling
-        min={2}
+        minDistance={10}
         onAfterChange={(value)=>
           {setSize(value[1])
+          console.log(value[1])
+          console.log(size);
           }}
         />
       </main>
