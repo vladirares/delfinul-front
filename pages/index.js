@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Table from '../components/Table'
+import ReactSlider from 'react-slider'
 
-export default function Home() {
+export default function Home({array}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -12,47 +14,23 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <Table array={array} />
+        <ReactSlider
+        className="vertical-slider"
+        thumbClassName="example-thumb"
+        trackClassName="example-track"
+        defaultValue={[0, 50, 100]}
+        ariaLabel={['Lowest thumb', 'Middle thumb', 'Top thumb']}
+        renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+        orientation="vertical"
+        invert
+        pearling
+        minDistance={10}
+        />
       </main>
 
       <footer className={styles.footer}>
+    
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
@@ -66,4 +44,22 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+// This gets called on every request
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch('http://localhost:8080/public/generate/board?size=40')
+  const array = await res.json()
+
+  // Pass data to the page via props
+  return { props: { array } }
+}
+
+function getArray(){
+  return [[0,1,0,1,1],
+          [0,1,0,1,1],
+          [0,0,0,0,1],
+          [0,1,2,1,1],
+          [3,1,1,1,1]]
 }
